@@ -72,7 +72,8 @@ def post_edit_assessments(assessment_id):
 
     assessment = models.Assessments.query.get(assessment_id)
     if assessment is None:
-        return {"status": False, "err": f"assessment id = {assessment_id} don't exist"}
+        return {"status": False,
+                "err": f"assessment id = {assessment_id} don't exist"}
 
     try:
         assessment.title = body["title"]
@@ -95,7 +96,8 @@ def post_delete_assessments(assessment_id):
     """delete: delete assessment"""
     assessment = models.Assessments.query.get(assessment_id)
     if assessment is None:
-        return {"status": False, "err": f"assessment id = {assessment_id} don't exist"}
+        return {"status": False,
+                "err": f"assessment id = {assessment_id} don't exist"}
 
     try:
         db.session.delete(assessment)
@@ -112,10 +114,12 @@ def post_delete_assessments(assessment_id):
 @app.route('/')
 def index():
     """get: static"""
-    return send_from_directory(os.path.join(os.getcwd(), 'static/dist/'), 'index.html')
+    return send_from_directory(
+        os.path.join(os.getcwd(), 'static/dist/'), 'index.html')
 
 
 @app.route('/assets/<path:path>')
 def assets(path):
     """get: js/css file"""
-    return send_from_directory(os.path.join(os.getcwd(), 'static/dist/assets'), path)
+    return send_from_directory(
+        os.path.join(os.getcwd(), 'static/dist/assets'), path)

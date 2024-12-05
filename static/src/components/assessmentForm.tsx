@@ -164,8 +164,10 @@ const AssessmentForm = ({
               <Typography aria-label={`${formState == FormState.ADD ? 'Add' : 'Update'} Assessments`}>
                 {formState == FormState.ADD ? 'Add' : 'Update'} Assessments
               </Typography>
+
               <a onClick={() => onClose?.()}><CloseIcon color="action" /></a>
             </Box>
+
             <Box className="flex flex-row gap-2">
               <TextField
                 aria-label="title field"
@@ -175,6 +177,7 @@ const AssessmentForm = ({
                 label="Title"
                 size="small"
               />
+
               <TextField
                 aria-label="module code field"
                 label="Module code"
@@ -184,6 +187,7 @@ const AssessmentForm = ({
                 error={error['module_code'] ?? false}
               />
             </Box>
+
             <Box className="flex flex-row gap-2">
               <DateTimePicker
                 aria-label="deadline field"
@@ -199,6 +203,7 @@ const AssessmentForm = ({
                   },
                 }}
               />
+
               <FormControl
                 sx={{
                   width: 195,
@@ -206,6 +211,7 @@ const AssessmentForm = ({
                 size="small"
               >
                 <InputLabel id="status-label">Status</InputLabel>
+
                 <Select
                   aria-label="status field"
                   value={data['status'] ?? ''}
@@ -218,10 +224,12 @@ const AssessmentForm = ({
                   label="Status"
                 >
                   <MenuItem value={1}>Completed</MenuItem>
+
                   <MenuItem value={0}>Incomplete</MenuItem>
                 </Select>
               </FormControl>
             </Box>
+
             <Box className="w-full">
               <TextField
                 aria-label="description field"
@@ -236,6 +244,7 @@ const AssessmentForm = ({
                 className="w-full"
               />
             </Box>
+
             <Box className="flex justify-end gap-2" aria-label="delete assessment">
               {
                 formState == FormState.EDIT ? (
@@ -248,12 +257,14 @@ const AssessmentForm = ({
                 )
                   : undefined
               }
+
               <Button
                 aria-label="cancel add/edit"
                 size="small"
                 variant="outlined"
                 onClick={() => onClose?.()}
               >Cancel</Button>
+
               <Button
                 aria-label="submit add/edit"
                 size="small"

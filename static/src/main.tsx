@@ -9,6 +9,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <StyledEngineProvider injectFirst>
       <CssBaseline />
+
       <App />
     </StyledEngineProvider>
   </StrictMode>,
@@ -17,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
 export default (
   <StyledEngineProvider injectFirst>
     <CssBaseline />
+
     <App />
   </StyledEngineProvider>
 )

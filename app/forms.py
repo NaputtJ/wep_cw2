@@ -3,7 +3,7 @@ from wtforms import IntegerField, StringField, TextAreaField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
 
-def validate_int(_form, field):
+def validate_bool(_form, field):
     """custom integer valadation"""
     if field in (0, 1):
         raise ValidationError("status must be 0 or 1")
@@ -17,4 +17,4 @@ class AssessmentForm(FlaskForm):
         "deadline", validators=[DataRequired()], format="%d-%m-%Y %H:%M"
     )
     desc = TextAreaField("desc", validators=[DataRequired()])
-    status = IntegerField("status", validators=[validate_int])
+    status = IntegerField("status", validators=[validate_bool])

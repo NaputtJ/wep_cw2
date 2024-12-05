@@ -84,7 +84,7 @@ export default tseslint.config(
       }],
       "react/jsx-props-no-multi-spaces": [1],
       "react/jsx-newline": [2, {
-        "prevent": true,
+        "prevent": false,
         "allowMultilines": false,
       }],
       "react/jsx-indent": [2, 2, {

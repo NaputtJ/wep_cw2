@@ -3,10 +3,23 @@ import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
+from . import utils
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, origins="http://localhost:3000")
 app.config.from_object("config")
+app.config["JWT_SECRET_KEY"] = "super-secret"
+app.config['JWT_TOKEN_LOCATION'] = ['cookies']
+app.config['JWT_COOKIE_SECURE'] = True
+app.config['JWT_ACCESS_COOKIE_NAME'] = 'user_jwt'
+# app.config['JWT_COOKIE_DOMAIN'] = "localhost:3000"
+app.config['JWT_COOKIE_SAMESITE'] = "None"
+app.config['JWT_ACCESS_COOKIE_PATH'] = '/'
+app.config['JWT_REFRESH_COOKIE_PATH'] = '/token/refresh'
+app.config['JWT_COOKIE_CSRF_PROTECT'] = False
+
+jwt = JWTManager(app)
 
 try:
     result = subprocess.run(["./db_setup.sh"], check=True)
@@ -16,4 +29,6 @@ except subprocess.CalledProcessError as e:
 
 db = SQLAlchemy(app)
 
-from app import view
+# fmt: off
+# from app import view
+from app import routes
