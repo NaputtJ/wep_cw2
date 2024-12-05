@@ -1,9 +1,10 @@
 from app import app, middleware, db
 from flask import jsonify, g
 from sqlalchemy import text
+from . import seller_bp
 
 
-@app.route('/api/seller/orders')
+@seller_bp.route('/api/seller/orders')
 @middleware.user_login
 def get_seller_orders():
     basket = db.session.execute(

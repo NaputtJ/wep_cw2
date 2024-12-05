@@ -3,9 +3,10 @@ from flask import jsonify
 from flask_jwt_extended import (
     unset_jwt_cookies
 )
+from . import auth_bp
 
 
-@app.route('/api/logout', methods=['POST'])
+@auth_bp.route('/logout', methods=['POST'])
 def logout():
     resp = jsonify({'status': True})
     unset_jwt_cookies(resp)

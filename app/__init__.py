@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
@@ -6,9 +6,16 @@ from . import utils
 import os
 
 app = Flask(__name__)
-cors_origin = os.getenv('CORS_ORIGIN_URL', '*')
+cors_origin = os.getenv('CORS_ORIGIN_URL', 'http://localhost:3000/')
+print(cors_origin)
 CORS(app, supports_credentials=True, resources={
-     r"/*": {"origins": cors_origin}})
+     r"/*": {
+         "origins": cors_origin,
+         "allow_headers": "*"
+         # "allow_headers": ["Content-Type", "Authorization",
+         #                   "Cache-Control", "X-Requested-With", "Pragma",
+         #                   "Expires"]
+     }})
 app.config.from_object("config")
 app.config["JWT_SECRET_KEY"] = "super-secret"
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
@@ -39,3 +46,21 @@ db = SQLAlchemy(app)
 # fmt: off
 # from app import view
 from app import routes
+
+app.register_blueprint(routes.root_bp)
+app.register_blueprint(routes.api_bp, url_prefix="/api")
+
+
+@app.route('/assets/<path:path>')
+def get_assets(path):
+    """get: js/css file"""
+    return send_from_directory(
+        os.path.join(os.getcwd(), 'static/dist/assets'), path)
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index(path):
+    """get: static"""
+    return send_from_directory(
+        os.path.join(os.getcwd(), 'static/dist/'), 'index.html')

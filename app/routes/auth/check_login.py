@@ -1,9 +1,10 @@
-from app import app, middleware, db
+from app import middleware, db
 from flask import jsonify, g
 from sqlalchemy import text
+from . import auth_bp
 
 
-@app.route('/api/user')
+@auth_bp.route('/user')
 @middleware.user_login
 def get_check_login():
     user = db.session.execute(

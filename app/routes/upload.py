@@ -1,5 +1,6 @@
-from app import app, middleware
+from app import middleware
 from flask import request, g
+from . import root_bp
 import os
 import random
 import string
@@ -8,7 +9,7 @@ FILE_PATH = "./temp/file/"
 TEMP_FILE_PATH = "./temp/file/temp/"
 
 
-@app.route("/upload", methods=["POST"])
+@root_bp.route("/upload", methods=["POST"])
 @middleware.user_login
 def post_upload():
     if 'image' not in request.files:

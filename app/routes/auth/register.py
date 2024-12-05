@@ -8,10 +8,10 @@ from flask_jwt_extended import (
 )
 from sqlalchemy import text
 import bcrypt
-from . import form
+from . import form, auth_bp
 
 
-@app.route("/api/register", methods=["POST"])
+@auth_bp.route("/api/register", methods=["POST"])
 def post_register():
     """post register user"""
 
@@ -40,8 +40,8 @@ def post_register():
         print("Error: ", error)
         return {"status": False, "err": {"msg": "failed to add user"}}, 500
 
-    jwt = create_access_token(identity=new_user.id)
-    refresh_token = create_refresh_token(identity=new_user.id)
+    jwt = create_access_token(identity=str(new_user.id))
+    refresh_token = create_refresh_token(identity=str(new_user.id))
 
     res = make_response(jsonify({"status": True}))
     set_access_cookies(res, jwt)

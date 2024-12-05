@@ -7,11 +7,11 @@ from flask_jwt_extended import (
     set_refresh_cookies
 )
 from sqlalchemy import text
-from . import form
+from . import form, auth_bp
 import bcrypt
 
 
-@app.route("/api/login", methods=["POST"])
+@auth_bp.route("/login", methods=["POST"])
 def post_login():
     """get: get all assessments"""
 
@@ -30,8 +30,8 @@ def post_login():
                           user.password.encode('utf-8')):
         return {"status": False, "err": {"msg": "Incorrect password"}}
 
-    jwt = create_access_token(identity=user.id)
-    refresh_token = create_refresh_token(identity=user.id)
+    jwt = create_access_token(identity=str(user.id))
+    refresh_token = create_refresh_token(identity=str(user.id))
 
     res = make_response(jsonify({"status": True}))
     set_access_cookies(res, jwt)

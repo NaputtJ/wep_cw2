@@ -3,8 +3,9 @@ import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from "axios";
 import router from "../router"
 import { buildWebStorage, setupCache } from "axios-cache-interceptor";
 
+export const serverRoute = "/"
 // export const serverRoute = "http://127.0.0.1:3001/"
-export const serverRoute = process.env.SERVER_URL ?? "http://127.0.0.1:5000"
+// export const serverRoute = import.meta.env.SERVER_URL ?? "http://127.0.0.1:5000"
 export const fileRoute = serverRoute + "files/"
 
 export type ApiResponse<T = any> = {

@@ -3,8 +3,8 @@ const db = new Database('./temp/database.sqlite');
 const bcrypt = require('bcrypt');
 const { faker } = require('@faker-js/faker')
 
-const NUM_SELLER = 20;
-const MAX_PRODUCT_COUNT = 20
+const NUM_SELLER = 200;
+const MAX_PRODUCT_COUNT = 100
 const NUM_PRODUCT_IMG = 9
 const MAX_PRODUCT_STOCK = 1000
 const MAX_PRODUCT_SOLD_AMOUNT = 1000

@@ -8,7 +8,7 @@ def user_login(func):
     @wraps(func)
     @jwt_required(locations=['cookies'])
     def decorated_function(*args, **kwargs):
-        g.user_id = get_jwt_identity()
+        g.user_id = int(get_jwt_identity())
         return func(*args, **kwargs)
 
     return decorated_function

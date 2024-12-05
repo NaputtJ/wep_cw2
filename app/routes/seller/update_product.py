@@ -1,10 +1,10 @@
 from app import app, db, middleware, utils, models
 from flask import g
-from . import form
+from . import form, seller_bp
 import json
 
 
-@app.route("/api/seller/product/<int:product_id>", methods=["POST"])
+@seller_bp.route("/api/seller/product/<int:product_id>", methods=["POST"])
 @middleware.user_login
 def post_seller_update_product(product_id):
 
