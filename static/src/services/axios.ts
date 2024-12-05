@@ -4,7 +4,7 @@ import router from "../router"
 import { buildWebStorage, setupCache } from "axios-cache-interceptor";
 
 // export const serverRoute = "http://127.0.0.1:3001/"
-export const serverRoute = "https://wep-cw2.onrender.com"
+export const serverRoute = process.env.SERVER_URL ?? "http://127.0.0.1:5000"
 export const fileRoute = serverRoute + "files/"
 
 export type ApiResponse<T = any> = {

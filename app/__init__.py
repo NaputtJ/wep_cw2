@@ -1,5 +1,3 @@
-import subprocess
-import sys
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -8,7 +6,8 @@ from . import utils
 import os
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins="http://localhost:3000")
+cors_origin = os.getenv('CORS_ORIGIN_URL', '*')
+CORS(app, supports_credentials=True, origins=cors_origin)
 app.config.from_object("config")
 app.config["JWT_SECRET_KEY"] = "super-secret"
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
