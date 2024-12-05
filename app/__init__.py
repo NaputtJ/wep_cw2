@@ -7,7 +7,8 @@ import os
 
 app = Flask(__name__)
 cors_origin = os.getenv('CORS_ORIGIN_URL', '*')
-CORS(app, supports_credentials=True, origins=cors_origin)
+CORS(app, supports_credentials=True, resources={
+     r"/*": {"origins": cors_origin}})
 app.config.from_object("config")
 app.config["JWT_SECRET_KEY"] = "super-secret"
 app.config['JWT_TOKEN_LOCATION'] = ['cookies']
