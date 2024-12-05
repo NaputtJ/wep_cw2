@@ -1,32 +1,46 @@
-# Use a Python base image
-FROM python:3.11-slim
+FROM ubuntu:20.04
 
-# Install system dependencies
+RUN apt-get update
+
+RUN apt-get update && apt-get install -y curl bash \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash \
+    && /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 22"
+
+# RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+#     && apt-get install -y nodejs
+#
+# RUN python3 -m venv /venv
+# RUN /venv/bin/pip install --upgrade pip
 RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    wget \
     curl \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
+    lsb-release
 
-# Install Node.js and npm
-RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-    && apt-get install -y nodejs \
-    && npm install -g npm@latest
+RUN add-apt-repository ppa:deadsnakes/ppa
 
-# Set the working directory
+RUN apt-get update && apt-get install -y python3.11 python3.11-distutils python3-pip
+
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python3
+
+
+# RUN apt-get update && apt-get install -y \
+#     python3.9 python3.9-distutils python3-pip \
+#     tzdata \
+#     && ln -sf /usr/bin/python3.9 /usr/bin/python3 \
+#     && ln -sf /usr/bin/python3.9 /usr/bin/python \
+#     && dpkg-reconfigure --frontend Noninteractive tzdata
+
 WORKDIR /app
 
-# Copy the requirements file
-COPY requirements.txt .
+COPY ./requirements.txt .
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
-# Copy the application code
 COPY . .
 
-# Expose the Flask default port
 EXPOSE 5000
 
-# Run Flask application
-CMD ["flask", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "run", "run", "--host=0.0.0.0"]
 
