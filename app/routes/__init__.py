@@ -9,4 +9,4 @@ from . import single_product
 from . import user
 from . import seller_info
 from . import search
-from . import static
+# from . import static

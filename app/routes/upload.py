@@ -1,11 +1,8 @@
-from app import app, db, middleware
-from flask import jsonify, request, g
-from sqlalchemy import text
+from app import app, middleware
+from flask import request, g
 import os
-from PIL import Image
-import imagehash
-import base64
-import shutil
+import random
+import string
 
 FILE_PATH = "./temp/file/"
 TEMP_FILE_PATH = "./temp/file/temp/"
@@ -22,36 +19,23 @@ def post_upload():
         return {"status": False,
                 "err": {"msg": f"Invalid image type: {file.content_type}"}}
 
-    tempFilePath = os.path.join(TEMP_FILE_PATH, file.filename)
-    file.save(tempFilePath)
-
-    image = Image.open(tempFilePath)
-    phash = imagehash.phash(image)
-
-    sanatiseHash = base64.b32encode(bytes.fromhex(
-        str(phash))).decode('utf-8').rstrip("=")
+    fileExtension = ''
     if file.content_type == 'image/png':
-        sanatiseHash += '.png'
+        fileExtension += '.png'
     else:
-        sanatiseHash += '.jpeg'
+        fileExtension += '.jpeg'
 
-    fullFilePath = f"{g.user_id}-{sanatiseHash}"
+    fullFilePath = ''
+    while True:
+        random_string = ''.join(random.choice(
+            string.ascii_letters) for i in range(20))
 
-    filePath = os.path.join(FILE_PATH, fullFilePath)
-    if os.path.exists(filePath):
-        try:
-            os.remove(tempFilePath)
-        except Exception as e:
-            print(f"Error trying to remove temp file: {e}")
+        fullFilePath = f"{g.user_id}-{random_string}{fileExtension}"
 
-        return {
-            "status": True,
-            "data": {
-                "filename": fullFilePath,
-            }
-        }
-
-    shutil.move(tempFilePath, filePath)
+        filePath = os.path.join(FILE_PATH, fullFilePath)
+        if not os.path.exists(filePath):
+            file.save(filePath)
+            break
 
     return {
         "status": True,
