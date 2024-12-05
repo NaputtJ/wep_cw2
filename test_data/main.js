@@ -1,5 +1,5 @@
 const Database = require('better-sqlite3');
-const db = new Database('../temp/database.sqlite');
+const db = new Database('./temp/database.sqlite');
 const bcrypt = require('bcrypt');
 const { faker } = require('@faker-js/faker')
 
@@ -23,32 +23,6 @@ async function encodePassword(password) {
     '0',
   )).join('');
 }
-
-
-// id = db.Column(db.Integer, primary_key=True)
-// user_id = db.Column(db.Integer, nullable=False)
-// name = db.Column(db.String(255), nullable=False)
-// product_category_id = db.Column(db.Integer, nullable=False)
-// price = db.Column(db.Float, nullable=False)
-// stock = db.Column(db.Integer, nullable=False, default=0)
-// desc = db.Column(db.Text, nullable=False)
-// sold_amount = db.Column(db.Integer, nullable=False, default=0)
-//
-// # json_array of string: path to img
-// imgs = db.Column(db.Text, default="[]")
-
-const ecommerceCategories = [
-  "Fashion",
-  "Food",
-  "Technology",
-  "Business",
-  "Furniture",
-  "Sports",
-  "Beauty",
-  "Jewelry",
-  "Toys",
-  "Automotive"
-];
 
 async function insert(hashpass) {
   for (let i = 0; i < NUM_SELLER; i++) {
@@ -75,7 +49,6 @@ async function insert(hashpass) {
       }
 
       const productImg = new Array(NUM_PRODUCT_IMG)
-      const imgCatI = Math.floor(Math.random() * (ecommerceCategories.length - 1))
       for (let k = 0; k < NUM_PRODUCT_IMG; k++) {
         productImg[k] = faker.image.url({ width: 500, height: 500 })
       }

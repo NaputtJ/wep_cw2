@@ -11,6 +11,8 @@ except subprocess.CalledProcessError as e:
 with app.app_context():
     # db.drop_all()
     db.create_all()
+    subprocess.run(['node', './test_data/main.js'],
+                   check=True)
 
 if __name__ == "__main__":
     app.run(debug=True)
