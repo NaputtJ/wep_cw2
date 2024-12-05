@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from . import utils
+import os
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True, origins="http://localhost:3000")
@@ -21,11 +22,17 @@ app.config['JWT_COOKIE_CSRF_PROTECT'] = False
 
 jwt = JWTManager(app)
 
-try:
-    result = subprocess.run(["./db_setup.sh"], check=True)
-except subprocess.CalledProcessError as e:
-    print(f"failed to setup db: {e}")
-    sys.exit(1)
+db_file = "./temp/database.sqlite"
+
+if not os.path.isfile(db_file):
+    os.makedirs(os.path.dirname(db_file), exist_ok=True)
+    with open(db_file, "w") as f:
+        pass
+# try:
+#     result = subprocess.run(["./db_setup.sh"], check=True)
+# except subprocess.CalledProcessError as e:
+#     print(f"failed to setup db: {e}")
+#     sys.exit(1)
 
 db = SQLAlchemy(app)
 

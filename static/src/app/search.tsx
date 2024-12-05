@@ -9,23 +9,25 @@ const Search = () => {
 
   return (
     <>
-      <PageWrapper
-        inlineWidth
-        inlineHeight
-        sx={{
-          width: "100%",
-          maxWidth: "1200px",
-        }}
-      >
-        <Box className="flex flex-col gap-2">
-          <Typography aria-label="Register" variant="h1" className="text-2xl whitespace-nowrap">
-            Search: "{searchParams.get("key")}"
-          </Typography>
+      <Box className="flex justify-center">
+        <PageWrapper
+          inlineWidth
+          inlineHeight
+          sx={{
+            width: "100%",
+            maxWidth: "1200px",
+          }}
+        >
+          <Box className="flex flex-col gap-2">
+            <Typography aria-label="Register" variant="h1" className="text-2xl whitespace-nowrap">
+              Search: "{searchParams.get("key")}"
+            </Typography>
 
-          <ProductInfiniteScroll url="/api/search" query={{ name: searchParams.get("key") }} />
-        </Box>
+            <ProductInfiniteScroll url="/api/search" query={{ name: searchParams.get("key") }} />
+          </Box>
 
-      </PageWrapper>
+        </PageWrapper>
+      </Box>
     </>
   )
 }
