@@ -89,7 +89,7 @@ const LoginPage = () => {
               />
             </Box>
 
-            <Button type="submit" variant="contained">Submit</Button>
+            <Button type="submit" variant="contained" aria-label="submit button">Submit</Button>
           </Box>
         </form>
 

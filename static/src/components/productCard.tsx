@@ -28,6 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <img
                 src={product.imgs[0].includes("https://") ? product.imgs[0] : fileRoute + product.imgs[0]}
                 alt="Preview"
+                aria-label="product image"
                 className="max-w-full"
               />
             </Box>
@@ -39,7 +40,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               flex: "1 1",
             }}
           >
-            <div className="text-base leading-4 line-clamp-2 break-words overflow-hidden ">
+            <div
+              className="text-base leading-4 line-clamp-2 break-words overflow-hidden "
+              aria-label="product name"
+            >
               {product.name}
             </div>
 
@@ -47,11 +51,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               <Box
                 className="flex items-center"
                 sx={{ color: theme.palette.primary.main }}
+                aria-label="product price"
               >
                 £<Box className="text-base">{product.price}</Box>
               </Box>
 
-              <Box sx={{ color: theme.palette.text.secondary }}>
+              <Box
+                sx={{ color: theme.palette.text.secondary }}
+                aria-label="product sold amount"
+              >
                 Sold: {product.sold_amount}
               </Box>
             </Box>

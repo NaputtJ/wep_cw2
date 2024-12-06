@@ -186,7 +186,7 @@ const ImageUpload = forwardRef(({
                     ) : (
 
                       <ImageWrapper
-                        src={fileRoute + item!.src}
+                        src={item!.src.includes("https://") ? item!.src : fileRoute + item!.src}
                         onPreview={() => openPreview(fileRoute + item.src!)}
                         onDelete={() => onDelete(i)}
                       />

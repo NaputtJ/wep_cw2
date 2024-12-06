@@ -85,6 +85,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
                   <IconButton
                     color={error ? "error" : "primary"}
                     // size="small"
+                    aria-label="increase product quantity by 1 button"
                     disabled={value <= 1}
                     onClick={() => {
                       arrowClick(value - 1)
@@ -107,6 +108,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
                   <IconButton
                     color={error ? "error" : "primary"}
                     disabled={value >= product.stock}
+                    aria-label="decrease product quantity by 1 button"
                     onClick={() => {
                       arrowClick(value + 1)
                     }}

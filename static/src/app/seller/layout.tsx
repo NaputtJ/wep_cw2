@@ -1,9 +1,8 @@
-import { Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import {
   Drawer,
   List,
@@ -17,8 +16,7 @@ import {
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
-import { useApi } from "../../hook/api";
-import { useSnackbar } from "notistack";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const drawerWidth = 240;
 
@@ -68,21 +66,9 @@ const SideMenu = (
 
 const AppLayout = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')); // Adjust 'sm' as needed
-  const navigate = useNavigate()
-  const api = useApi()
-  const { enqueueSnackbar } = useSnackbar();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
-  async function onLogout() {
-    const res = await api.post("/api/logout")
-    if (res.status) {
-      navigate('/login')
-    } else {
-      enqueueSnackbar("failed to logout", { variant: 'error' })
-    }
-  }
 
   return (
     <div className="h-screen w-screen">
@@ -109,11 +95,16 @@ const AppLayout = () => {
             <Box className="flex flex-row gap-2">
               {
                 isMobile ? (
-                  <a
-                    className="flex items-centerLogiLoginn"
-                    style={{ color: 'inherit' }}
-                    onClick={() => setIsMobileMenuOpen(true)}
-                  ><MenuIcon /></a>
+                  <Box className="flex items-center">
+                    <a
+                      className="flex items-centerLogiLoginn"
+                      style={{ color: 'inherit' }}
+                      onClick={() => setIsMobileMenuOpen(true)}
+                      aria-label="open menu button"
+                    >
+                      <MenuIcon />
+                    </a>
+                  </Box>
                 ) : undefined
               }
 
@@ -126,7 +117,19 @@ const AppLayout = () => {
               </Typography>
             </Box>
 
-            <Button color="inherit" aria-label="Logout button" onClick={onLogout}>Logout</Button>
+            <Box>
+              <Link
+                to="/user/profile"
+                className="flex items-center"
+                aira-label="user profile button"
+              >
+                <SettingsIcon
+                  sx={{
+                    color: theme.palette.common.white,
+                  }}
+                />
+              </Link>
+            </Box>
           </Toolbar>
         </AppBar>
 

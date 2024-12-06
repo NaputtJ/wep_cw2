@@ -40,16 +40,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ order }) => {
       <Card className="w-full">
         <CardContent>
           <Box className="flex flex-row justify-between items-center overflow-x-scroll">
-            <Link to={`/seller/${order.seller_id}`}>
+            <Link to={`/seller/${order.seller_id}`} aria-label="customer name">
               {order.seller_name == null ? order.seller_email : order.seller_name}
             </Link>
 
             <Box className="flex gap-4 p-1 items-center">
-              <Box className="whitespace-nowrap">status: {orderStatus[order.status]}</Box>
+              <Box className="whitespace-nowrap" aria-label="order status">status: {orderStatus[order.status]}</Box>
 
-              <Box className="whitespace-nowrap">Order price: £{totalPrice}</Box>
+              <Box className="whitespace-nowrap" aria-label="order price">Order price: £{totalPrice}</Box>
 
-              <IconButton onClick={() => setExpanded((bExpand) => !bExpand)}>
+              <IconButton onClick={() => setExpanded((bExpand) => !bExpand)} aria-label="expand order button">
                 {
                   expanded ?
                     <KeyboardArrowUpIcon /> :
@@ -72,7 +72,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ order }) => {
                           minWidth: '300px',
                         }}
                       >
-                        <Box className="text-md line-clamp-2 break-words overflow-hidden">
+                        <Box className="text-md line-clamp-2 break-words overflow-hidden" aria-label="product name">
                           {item.product.name}
                         </Box>
                       </Box>
@@ -83,16 +83,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ order }) => {
                           minWidth: "200px",
                         }}
                       >
-                        <Box className="whitespace-nowrap text-center">
+                        <Box className="whitespace-nowrap text-center" aria-label="product quantity">
                           quantity: {item.quantity}
                         </Box>
 
                         <Box className="flex flex-col justify-center">
-                          <Box className="whitespace-nowrap text-center">
+                          <Box className="whitespace-nowrap text-center" aria-label="product unit price">
                             Unit price: £{item.product.price}
                           </Box>
 
-                          <Box className="whitespace-nowrap text-center">
+                          <Box className="whitespace-nowrap text-center" aria-label="product total price">
                             Total price: £{Math.round(item.product.price * item.quantity)}
                           </Box>
                         </Box>

@@ -112,7 +112,11 @@ const AppLayout = () => {
                   </Button>
                 ) : (
                   <Box className="flex flex-row gap-4">
-                    <Link to="/user/basket" className="flex items-center">
+                    <Link
+                      to="/user/basket"
+                      className="flex items-center"
+                      aira-label="basket button"
+                    >
                       <ShoppingBasketIcon
                         sx={{
                           color: theme.palette.common.white,
@@ -120,7 +124,11 @@ const AppLayout = () => {
                       />
                     </Link>
 
-                    <Link to="/user/profile" className="flex items-center">
+                    <Link
+                      to="/user/profile"
+                      className="flex items-center"
+                      aira-label="user profile button"
+                    >
                       <SettingsIcon
                         sx={{
                           color: theme.palette.common.white,

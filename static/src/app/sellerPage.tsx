@@ -38,61 +38,68 @@ const SellerPage = () => {
           }}
         >
           <Box className="flex flex-col gap-2 w-full">
-            <Typography aria-label="Register" variant="h1" className="text-2xl">Seller Info</Typography>
+            <Typography aria-label="seller info" variant="h1" className="text-2xl">Seller Info</Typography>
 
             {
               seller == null ?
                 <Skeleton animation="wave" height={20} width="25%" /> : (
-                  <Typography aria-label="Register" variant="h3" className="text-xl whitespace-nowrap">
+                  <Typography aria-label="seller name" variant="h3" className="text-xl whitespace-nowrap text-wrap">
                     Seller name: {
                       seller.name == null
                         ? seller.email : `${seller.name} (${seller.email})`
                     }
                   </Typography>
-                )}
-
+                )
+            }
 
             <Box className="flex flex-col">
-
               <Grid2
                 container
                 sx={{
                   justifyContent: 'start',
                   width: "100%",
                 }}
-                columns={2}
+                columns={{
+                  xs: 1,
+                  sm: 2,
+                }}
               >
                 <Grid2
                   size={1}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-wrap"
+                  aria-label="seller phone number"
                 >
                   phone number: {seller?.phone_number}
                 </Grid2>
 
                 <Grid2
                   size={1}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-wrap"
+                  aria-label="seller address"
                 >
                   address: {seller?.address}
                 </Grid2>
 
                 <Grid2
                   size={1}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-wrap"
+                  aria-label="seller city"
                 >
                   city: {seller?.city}
                 </Grid2>
 
                 <Grid2
                   size={1}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-wrap"
+                  aria-label="seller zip code"
                 >
                   zip code: {seller?.zip_code}
                 </Grid2>
 
                 <Grid2
                   size={1}
-                  className="whitespace-nowrap"
+                  className="whitespace-nowrap text-wrap"
+                  aria-label="seller product count"
                 >
                   product count: {seller?.product_count}
                 </Grid2>
@@ -111,7 +118,7 @@ const SellerPage = () => {
           }}
         >
           <Box className="flex flex-col gap-2">
-            <Typography aria-label="Register" variant="h2" className="text-2xl">Seller Product</Typography>
+            <Typography aria-label="seller product" variant="h2" className="text-2xl">Seller Product</Typography>
 
             <ProductInfiniteScroll url={`/api/${id}/products`} />
           </Box>

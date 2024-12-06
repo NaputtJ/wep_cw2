@@ -31,10 +31,15 @@ export class ApiInstance {
         return false
       }
 
+      if (err.config?.url === '/api/user') {
+        return false
+      }
+
       if (Object.prototype.hasOwnProperty.call(err.response.data, "msg")) {
         if (typeof (err.response.data as any).msg! === "string") {
           if ((err.response.data as any).msg!.includes("Missing cookie") ||
             (err.response.data as any).msg!.includes("Token has expired")) {
+            console.log(err)
             return true
           }
         }

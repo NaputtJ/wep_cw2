@@ -236,7 +236,11 @@ const ProfilePage = () => {
         >
           <Typography aria-label="Basket Page" variant="h1" className="text-2xl">Action</Typography>
 
-          <Button variant="contained" onClick={() => onLogout()}>Logout</Button>
+          <Button variant="contained" onClick={() => navigate("/seller/products")} aria-label="go to seller page button">Go to seller</Button>
+
+          <Button variant="contained" onClick={() => navigate("/")} aria-label="go to customer page button">Go to cutomer</Button>
+
+          <Button variant="contained" onClick={() => onLogout()} aria-label="logout button">Logout</Button>
         </PageWrapper>
 
         <PageWrapper

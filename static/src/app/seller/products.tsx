@@ -300,7 +300,12 @@ const ProductsPage = () => {
             disableColumnMenu
           />
 
-          <ImagePreview isOpen={isPreviewOpen} src={previewSrc} onClose={onPreviewClose} />
+          <ImagePreview
+            aria-label="image preview"
+            isOpen={isPreviewOpen}
+            src={previewSrc}
+            onClose={onPreviewClose}
+          />
 
         </PageWrapper>
       </Box>

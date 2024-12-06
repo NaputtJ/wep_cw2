@@ -260,7 +260,12 @@ The first image is use as thumbnail`}
               />
 
               <Box className="flex justify-end mt-4">
-                <Button disabled={isSubmitting} type="submit" variant="contained">Submit</Button>
+                <Button
+                  aria-label="submit button"
+                  disabled={isSubmitting}
+                  type="submit"
+                  variant="contained"
+                >Submit</Button>
               </Box>
             </Box>
           </PageWrapper>

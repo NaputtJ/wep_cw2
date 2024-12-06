@@ -101,7 +101,7 @@ const RegisterPage = () => {
 
         <Divider />
 
-        <Link to={"/login"} className="flex justify-center">
+        <Link to={"/login"} className="flex justify-center" aria-label="submit button">
           Login
         </Link>
 

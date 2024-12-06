@@ -116,7 +116,8 @@ const ProductPage = () => {
                 ) : (
                   <img
                     src={product.imgs[0].includes("https://") ? product.imgs[0] : fileRoute + product.imgs[0]}
-                    alt="Preview"
+                    alt="product preview"
+                    aria-label="product preview"
                     className="max-w-96 w-full"
                   />
                 )}
@@ -138,7 +139,10 @@ const ProductPage = () => {
                       <Skeleton animation="wave" height={20} width="80%" />
                     </Box>
                   ) : (
-                    <Box className="text-3xl line-clamp-2 break-words overflow-hidden">
+                    <Box
+                      aria-label="product name"
+                      className="text-3xl line-clamp-2 break-words overflow-hidden"
+                    >
                       {product.name}
                     </Box>
                   )}
@@ -150,10 +154,16 @@ const ProductPage = () => {
                     </Box>
                   )
                     : (
-                      <Box className="flex flex-row">
+                      <Box
+                        className="flex flex-row"
+                        aria-label="product sold amount"
+                      >
                         {product?.sold_amount} sold | seller:&nbsp;
 
-                        <Link to={`/seller/${product?.user_id}`}>
+                        <Link
+                          to={`/seller/${product?.user_id}`}
+                          aria-label="seller name"
+                        >
                           {product?.seller_name == null ? product?.seller_name : product.seller_email}
                         </Link>
                       </Box>
@@ -164,6 +174,7 @@ const ProductPage = () => {
                 <Box
                   className="flex items-center text-3xl"
                   sx={{ color: theme.palette.primary.main }}
+                  aria-label="product price"
                 >
                   £<Box className="text-2xl">{product?.price}</Box>
                 </Box>
@@ -173,9 +184,32 @@ const ProductPage = () => {
                 <QuantityInput product={product} onChange={setQuantity} />
 
                 <Box className="flex flex-row gap-2">
-                  <Button variant="outlined" size="large" onClick={() => addToBasket()}>Add to Cart</Button>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    aria-label="add to basket button"
+                    onClick={() => addToBasket()}
+                  >Add to basket</Button>
 
-                  <Button variant="contained" size="large" onClick={() => addToBasket(true)}>Buy</Button>
+                  <Button
+                    variant="contained"
+                    size="large"
+                    onClick={() => addToBasket(true)}
+                    aria-label="buy product"
+                  >Buy</Button>
+                </Box>
+
+                <Box
+                  className="flex flex-col text-wrap break-words"
+                  aria-label="product description"
+                >
+                  <Box
+                    className="text-lg"
+                  >
+                    Product description
+                  </Box>
+
+                  {product?.desc}
                 </Box>
 
               </Box>
