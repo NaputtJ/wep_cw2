@@ -11,9 +11,11 @@ import bcrypt
 from . import form, auth_bp
 
 
-@auth_bp.route("/api/register", methods=["POST"])
+@auth_bp.route("/register", methods=["POST"])
 def post_register():
     """post register user"""
+
+    print("register")
 
     authForm = form.AuthForm()
     if not authForm.validate_on_submit():
